@@ -11,5 +11,12 @@ export class NotFoundException extends Error{
 }
 export class UnauthorizedUserException extends Error{
     code = 401
-    message = 'Unauthorized user'
+    constructor(message = 'Unauthorized user'){
+        super()
+        this.message = message
+    }
+}
+export class MissingParameterException extends Error{
+    code = 400
+    message = 'missing request parameter'
 }

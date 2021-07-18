@@ -1,4 +1,4 @@
-import { NoRecordWithIdException } from "../../common/exceptions.common";
+import { NoRecordWithIdException } from "@libs/exceptions";
 import { Project, ProjectModel } from "../../schema";
 
 export class ProjectRepo{

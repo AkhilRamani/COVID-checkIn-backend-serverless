@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 
 import { User, UserModel } from "../../schema";
-import { NoRecordWithIdException, NotFoundException, UnauthorizedUserException } from "../../common/exceptions.common";
+import { NoRecordWithIdException, NotFoundException, UnauthorizedUserException } from "@libs/exceptions";
 import { UserRepoHelper } from './user.helpers';
 
 export class UserRepo {
@@ -42,11 +42,16 @@ export class UserRepo {
         return deletedDoc
     }
 
-    public static async addOrganisation(userEmail: string, orgId: string){
-        const updatedUser = await User.findOneAndUpdate({email: userEmail}, { $push: { organisations: orgId}}, { new: true})
-        if(!updatedUser) throw new NoRecordWithIdException(`User with email (${userEmail}) not fonund`)
-        return updatedUser
-    }
+    // public static async addOrganisation(userId: string, orgId: string){
+    //     const updatedUser = await User.findByIdAndUpdate(userId, { $push: { organisations: orgId}}, { new: true})
+    //     if(!updatedUser) throw new NoRecordWithIdException()
+    //     return updatedUser
+    // }
+
+    // public static async removeOrganisation(userIds: string[], orgId){
+    //     const updatedDocs = await User.find({ organisations: orgId })
+    //     return updatedDocs
+    // }
 
     public static async addUser(orgId: string, userId: string){
         const user = await User.findByIdAndUpdate(orgId, { $push: { users: userId }}, {new: true})

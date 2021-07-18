@@ -1,4 +1,4 @@
-import { UnauthorizedUserException } from '@functions/envBucketApp/common/exceptions.common'
+import { UnauthorizedUserException } from '@libs/exceptions'
 import * as jwt from 'jsonwebtoken'
 import { UserModel, User } from '../../schema'
 
