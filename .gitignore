@@ -4,3 +4,5 @@ yarn.lock
 bin/environment.sh
 .serverless
 .webpack
+
+package-lock.json

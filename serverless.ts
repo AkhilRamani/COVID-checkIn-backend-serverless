@@ -1,10 +1,9 @@
 import type { AWS } from '@serverless/typescript';
 
-import hello from '@functions/hello';
-import envBucketApp from '@functions/envBucketApp'
+import covidCheckInService from '@functions/covidCheckInService'
 
 const serverlessConfiguration: AWS = {
-  service: 'envbucketbackend',
+  service: 'UniProjectSE',
   frameworkVersion: '2',
   custom: {
     webpack: {
@@ -19,7 +18,7 @@ const serverlessConfiguration: AWS = {
   ],
   provider: {
     name: 'aws',
-    region: 'ap-southeast-2',
+    region: 'us-east-1',
     runtime: 'nodejs14.x',
     apiGateway: {
       minimumCompressionSize: 1024,
@@ -29,30 +28,12 @@ const serverlessConfiguration: AWS = {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       DB_URL: '${env:DB_URL}',
       JWT_SECRET: '${env:JWT_SECRET}',
-      AWS_S3_BUCKET: '${env:AWS_S3_BUCKET}'
+      // AWS_S3_BUCKET: '${env:AWS_S3_BUCKET}'
     },
     lambdaHashingVersion: '20201221',
   },
-  resources: {
-    Resources: {
-      EnvBucketFiles:{
-        Type: 'AWS::S3::Bucket',
-        Properties: {
-          BucketName: '${env:AWS_S3_BUCKET}',
-          AccessControl: 'Private',
-          CorsConfiguration: {
-            CorsRules: [{
-              AllowedHeaders: ['*'],
-              AllowedMethods: ['PUT'],
-              AllowedOrigins: ['*']
-            }]
-          }
-        }
-      }
-    }
-  },
   // import the function via paths
-  functions: { hello, envBucketApp },
+  functions: { covidCheckInService },
 };
 
 module.exports = serverlessConfiguration;

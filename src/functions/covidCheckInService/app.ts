@@ -1,6 +1,5 @@
 import express from 'express'
 import { eventContext } from 'aws-serverless-express/middleware';
-import expressFileUpload from 'express-fileupload'
 import {Routes} from './routes'
 
 class App{
@@ -16,7 +15,6 @@ class App{
     private config(): void{
         this.app.use(express.json())
         this.app.use(eventContext())
-        this.app.use(expressFileUpload())
     }
 }
 

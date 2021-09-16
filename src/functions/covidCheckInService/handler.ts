@@ -5,6 +5,6 @@ import { app } from './app';
 
 const server = awsServerless.createServer(app)
 
-export const envBucketApp: APIGatewayProxyHandler = (event, context) => {
+export const covidCheckinService: APIGatewayProxyHandler = (event, context) => {
   awsServerless.proxy(server, event, context)
 }

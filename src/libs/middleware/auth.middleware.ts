@@ -1,7 +1,7 @@
 import { connectToDB } from "@libs/dbConnecter.helper";
 import { errorHandler } from "@libs/errorHandler.helper.";
 import { NextFunction, Request, Response } from "express";
-import { UserRepoHelper } from "@functions/envBucketApp/repository/user/user.helpers";
+import { UserRepoHelper } from "@functions/covidCheckInService/repository/user/user.helpers";
 import { UnauthorizedUserException } from "@libs/exceptions";
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
