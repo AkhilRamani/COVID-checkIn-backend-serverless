@@ -12,6 +12,7 @@ export class LocationController{
     })
 
     static getLocations = lambdaHandler(async req => {
-        return response(req.body)
+        const data = await LocationRepo.getAll()
+        return response(data)
     })
 }

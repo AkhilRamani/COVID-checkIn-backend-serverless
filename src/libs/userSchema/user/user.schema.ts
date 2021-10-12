@@ -7,11 +7,7 @@ import * as _ from 'lodash'
 // import uuid from 'uuid'
 
 const userSchema = new Schema({
-    f_name: {
-        type: String,
-        required: true
-    },
-    l_name: {
+    name: {
         type: String,
         required: true
     },
@@ -19,25 +15,15 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    phone: {
-        type: Number,
-        required: true
-    },
     password: {
         type: String,
         required: true
     },
     type: {
         type: String,
-        enum: ['owner', 'emp'],
+        enum: ['admin', 'user'],
         required: true
     },
-    organisations: [{
-        type: String,
-    }],
-    users: [{
-        type: String,
-    }],
     tokens: [{
         access: String,
         token: String
@@ -59,7 +45,7 @@ userSchema.pre('save', function(next){
 
 userSchema.methods.toJSON = function(){
     let user = this
-    return _.pick(user.toObject(), ['f_name', 'l_name', 'email', 'phone', 'organisations'])
+    return _.pick(user.toObject(), ['name', 'email'])
 }
 
 // userSchema.methods.generateAuthToken = async function(access: string){

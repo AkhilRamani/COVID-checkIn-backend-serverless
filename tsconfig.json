@@ -24,5 +24,6 @@
   },
   "paths": {
     "@libs/*": ["src/libs/*"],
+    "@functions/*": ["src/functions/*"],
   }
 }

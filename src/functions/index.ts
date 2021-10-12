@@ -1,3 +1,5 @@
 // export { default as hello } from './hello';
 
-export { default as covidCheckinService } from './covidCheckInService'
+export { default as covidCheckInService } from './covidCheckInService'
+export { default as userAuthService } from './userAuthService'
+export { default as birthCertificateService } from './birthCertificateService'

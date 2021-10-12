@@ -1,6 +1,5 @@
 import type { AWS } from '@serverless/typescript';
-
-import covidCheckInService from '@functions/covidCheckInService'
+import {covidCheckInService, userAuthService, birthCertificateService} from '@functions/index'
 
 const serverlessConfiguration: AWS = {
   service: 'UniProjectSE',
@@ -33,7 +32,11 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: '20201221',
   },
   // import the function via paths
-  functions: { covidCheckInService },
+  functions: { 
+    covidCheckInService,
+    userAuthService,
+    birthCertificateService
+  },
 };
 
 module.exports = serverlessConfiguration;

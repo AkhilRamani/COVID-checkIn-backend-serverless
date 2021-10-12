@@ -1,6 +1,6 @@
 import { UnauthorizedUserException } from '@libs/exceptions'
 import * as jwt from 'jsonwebtoken'
-import { UserModel, User } from '../../schema'
+import { UserModel, User } from '@libs/userSchema'
 
 export class UserRepoHelper {
     public static async generateAuthToken(user: UserModel) {

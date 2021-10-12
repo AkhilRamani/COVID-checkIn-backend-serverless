@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 
-import { User, UserModel } from "../../schema";
+import { User, UserModel } from "@libs/userSchema";
 import { NoRecordWithIdException, NotFoundException, UnauthorizedUserException } from "@libs/exceptions";
 import { UserRepoHelper } from './user.helpers';
 

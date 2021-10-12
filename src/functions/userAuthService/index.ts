@@ -1,7 +1,7 @@
 import { handlerPath } from '@libs/handlerResolver';
 
 export default {
-  handler: `${handlerPath(__dirname)}/handler.covidCheckinService`,
+  handler: `${handlerPath(__dirname)}/handler.userAuthService`,
   // iamRoleStatements: [{
   //   Effect: 'Allow',
   //   Action: [
@@ -13,9 +13,9 @@ export default {
     {
       http: {
         method: 'any',
-        path: 'covidCheckInService/{proxy+}',
-        cors: true,
+        path: '/userAuthService/{proxy+}',
+        cors: true
       }
-    },
+    }
   ]
 }

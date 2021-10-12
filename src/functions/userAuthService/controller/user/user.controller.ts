@@ -1,12 +1,21 @@
 import { lambdaHandler } from '@libs/lambda.helper';
 import { response } from '@libs/responseFormatter.helper';
-import { UserModel } from "../../schema";
+import { UserModel } from "@libs/userSchema";
 import * as _ from 'lodash'
 import { UserRepo } from "../../repository";
 
 export class UserController{
     static createUser = lambdaHandler(async (req) => {
         const data: UserModel = req.body
+        data.type = 'user'
+        
+        const doc = await UserRepo.save(data)
+        return response(doc)
+    })
+
+    static createAdminUser = lambdaHandler(async (req) => {
+        const data: UserModel = req.body
+        data.type = 'admin'
         
         const doc = await UserRepo.save(data)
         return response(doc)
@@ -25,14 +34,5 @@ export class UserController{
         const id: string = req.params.id
         const deletedDoc = await UserRepo.delete(id)
         return response(deletedDoc)
-    })
-
-    static inviteUser = lambdaHandler(async req => {
-        const userId = req['user'].id
-        const invitedUserEmail = req.body.email
-
-        const invitedDoc = await UserRepo.addOrganisation(invitedUserEmail, userId)
-        const userDoc = await UserRepo.addUser(userId, invitedDoc._id.toHexString())
-        return response(userDoc)
     })
 }
