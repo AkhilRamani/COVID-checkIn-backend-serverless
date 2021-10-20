@@ -18,4 +18,8 @@ export class CheckInRepo{
         if(!updated) throw new NoRecordWithIdException()
         return updated
     }
+
+    public static getAllById(id: string){
+        return CheckIn.find({userId: id})        
+    }
 }

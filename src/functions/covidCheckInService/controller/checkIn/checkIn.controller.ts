@@ -1,13 +1,23 @@
 import { MissingParameterException } from "@libs/exceptions";
 import { lambdaHandler } from "@libs/lambda.helper";
 import { response } from "@libs/responseFormatter.helper";
-import { CheckInRepo } from "../../repository";
+import { CheckInRepo, LocationRepo } from "../../repository";
 import { CheckInModel } from "../../schema";
 
 export class CheckInController{
     static checkIn = lambdaHandler(async req => {
-        const data: CheckInModel = req.body
-        const doc = await CheckInRepo.save(data)
+        const locationId: string = req.params?.locationId
+        const location = await LocationRepo.getById(locationId)
+
+        const checkIn: any = {
+            locationId,
+            userId: req['user']._id,
+            loactionName: location.name,
+            locationAddress: location.address,
+            from: new Date()
+        }
+
+        const doc = await CheckInRepo.save(checkIn)
         return response(doc)
     })
 
@@ -19,5 +29,10 @@ export class CheckInController{
 
         const updatedDoc = await CheckInRepo.updateCheckOut(checkInID, endTime)
         return response(updatedDoc)
+    })
+
+    static getMyCheckins = lambdaHandler(async req => {
+        const checkIns = await CheckInRepo.getAllById(req['user']._id)
+        return response(checkIns || [])
     })
 }

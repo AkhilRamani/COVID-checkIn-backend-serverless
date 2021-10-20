@@ -12,13 +12,14 @@ export class Routes{
     }
     
     private bindRoutes(app: Application){
-        app.use('/birthCertificate', this.birthCertRouter)
+        app.use('/birthCertificate/certificate', this.birthCertRouter)
     }
 
     private birthCertRoutes(router: Router){
         router.post('/save', userAuthMiddleware, BirthCertificateController.createCertificate)
+        router.patch('/approve/:id', adminAuthMiddleware, BirthCertificateController.approveCertificate)
         router.get('/', adminAuthMiddleware, BirthCertificateController.getAllCertificates)
 
-        router.patch('/:id', adminAuthMiddleware, BirthCertificateController.approveCertificate)
+        router.get('/my', userAuthMiddleware, BirthCertificateController.getMyCertificate)
     }
 }

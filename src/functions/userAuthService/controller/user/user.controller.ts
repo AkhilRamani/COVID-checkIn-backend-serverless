@@ -2,15 +2,16 @@ import { lambdaHandler } from '@libs/lambda.helper';
 import { response } from '@libs/responseFormatter.helper';
 import { UserModel } from "@libs/userSchema";
 import * as _ from 'lodash'
-import { UserRepo } from "../../repository";
+import { UserRepo, UserRepoHelper } from "../../repository";
 
 export class UserController{
     static createUser = lambdaHandler(async (req) => {
         const data: UserModel = req.body
         data.type = 'user'
         
-        const doc = await UserRepo.save(data)
-        return response(doc)
+        const userDoc = await UserRepo.save(data)
+        const token = await UserRepoHelper.generateAuthToken(userDoc)
+        return response({user: userDoc, token})
     })
 
     static createAdminUser = lambdaHandler(async (req) => {

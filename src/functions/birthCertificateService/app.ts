@@ -1,5 +1,6 @@
 import express from 'express'
 import { eventContext } from 'aws-serverless-express/middleware';
+import cors from 'cors'
 import {Routes} from './routes'
 
 class App{
@@ -15,6 +16,7 @@ class App{
     private config(): void{
         this.app.use(express.json())
         this.app.use(eventContext())
+        this.app.use(cors())
     }
 }
 

@@ -11,6 +11,8 @@ const checkInSchema = new Schema({
         type: String,
         required: true
     },
+    loactionName: String,
+    locationAddress: String,
     from: {
         type: Date,
         required: true,

@@ -2,6 +2,10 @@ import {Model, Schema, model, models} from 'mongoose'
 import { BirthCertificateModel } from './birthCertificate.typedef'
 
 const birthCertificateSchema = new Schema({
+    userId: {
+        type: String,
+        required: true
+    },
     givenName: {
         type: String,
         required: true

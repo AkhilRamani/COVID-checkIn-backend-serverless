@@ -8,6 +8,7 @@ import { BirthCertificateModel } from '../schema';
 export class BirthCertificateController{
     static createCertificate = lambdaHandler(async (req) => {
         const data: BirthCertificateModel = req.body
+        data.userId = req['user']._id
         
         const doc = await BirthCertificateRepo.save(data)
         return response(doc)
@@ -24,5 +25,11 @@ export class BirthCertificateController{
 
         const data = await BirthCertificateRepo.updateStatus(id, true)
         return response(data)
+    })
+
+    static getMyCertificate = lambdaHandler(async req => {
+        const userId = req['user']._id
+        const certificate = await BirthCertificateRepo.getByUserId(userId)
+        return response(certificate)
     })
 }

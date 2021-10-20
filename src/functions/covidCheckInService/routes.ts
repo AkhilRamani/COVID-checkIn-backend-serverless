@@ -34,7 +34,8 @@ export class Routes{
     }
 
     private checkInRoutes(checkInRouter: Router){
-        checkInRouter.post('/in', CheckInController.checkIn)
-        checkInRouter.patch('/out/:id', CheckInController.checkOut)
+        checkInRouter.post('/in/:locationId', userAuthMiddleware, CheckInController.checkIn)
+        checkInRouter.patch('/out/:id', userAuthMiddleware, CheckInController.checkOut)
+        checkInRouter.get('/my', userAuthMiddleware, CheckInController.getMyCheckins)
     }
 }

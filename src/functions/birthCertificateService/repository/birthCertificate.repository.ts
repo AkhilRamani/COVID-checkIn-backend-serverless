@@ -7,6 +7,12 @@ export class BirthCertificateRepo{
         return certificate.save()
     }
 
+    public static async getByUserId(userId: string){
+        const data = await BirthCertificate.findOne({userId})
+        if(!data) return {}
+        return data
+    }
+
     public static getAll(){
         return BirthCertificate.find()
     }
